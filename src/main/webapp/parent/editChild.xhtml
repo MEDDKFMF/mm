@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="../WEB-INF/Templates/template.xhtml"
+                xmlns:ezcomp="jakarta.faces.composite/ezcomp">
+
+
+    <ui:define name="title">
+        Lab 8 - Edit Child - Single record edit view
+    </ui:define>
+    
+ <ui:define name="content">
+
+   <ezcomp:child operation="edit"
+                child="#{parentChildController.child}"
+                formAction="#{parentChildController.editChild()}"/>
+
+
+    </ui:define>
+
+</ui:composition>

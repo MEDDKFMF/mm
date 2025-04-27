@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="jakarta.faces.html"
+      xmlns:cc="jakarta.faces.composite"
+      xmlns:f="jakarta.faces.core"
+      xmlns:ui="jakarta.faces.facelets">
+
+
+    <cc:interface>
+        <cc:attribute name="operation" required="true" type="java.lang.String" shortDescription="One of create, read, update, or delete." />
+        <cc:attribute name="child" required="false" type="edu.iit.sat.itmd4515.csule1.domain.Child" shortDescription="Child model to use in the cc." />
+        <cc:attribute name="formAction" required="false" method-signature="java.lang.String methodName()" />
+    </cc:interface>
+
+    <cc:implementation>
+        <h:form>
+            
+             <ui:fragment rendered="#{not cc.attrs.operation.equalsIgnoreCase('create')}">
+                <h:panelGroup id="childIdField" layout="block">
+                    <h:outputLabel for="childId" value="Child ID #{cc.attrs.child.id}"/>
+                    <h:inputHidden id="childId" value="#{cc.attrs.child.id}" />
+                    <h:message for="childId" errorStyle="color:red" />
+                </h:panelGroup>
+            </ui:fragment>
+           
+            <h:panelGroup id="childNameField" layout="block">
+                <h:outputLabel for="childName" value="Child Name#{cc.attrs.child.name}"/>
+                <h:inputText 
+                    disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    id="childName" 
+                    value="#{cc.attrs.child.name}"/>
+                <h:message for="childName" errorStyle="color:red"/>
+            </h:panelGroup>
+            <!--</ui:fragment>-->
+            <h:panelGroup id="childGenderField" layout="block">
+                <h:outputLabel for="childGender" value="Gender"/>
+                <h:selectOneMenu 
+                    disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    id="childGender" 
+                    value="#{cc.attrs.child.gender}">
+                    <f:selectItems value="#{parentChildController.readAllGender()}"
+                                   var="childGen"
+                                   itemLabel="#{childGender.label}"
+                                   itemValue="#{childGender}" />
+                </h:selectOneMenu>
+                <h:message for="childGender" errorStyle="color:red"/>
+            </h:panelGroup>
+
+            <h:panelGroup id="childMealPrefField" layout="block">
+                <h:outputLabel for="childMealPref" value="Meal Preference"/>
+
+                <h:selectOneMenu 
+                    disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    id="childMealPref" 
+                    value="#{cc.attrs.child.mealPreference}">
+                    <f:selectItems value="#{parentChildController.readAllMealPref()}"
+                                   var="childPref"
+                                   itemLabel="#{mealPreference.label}"
+                                   itemValue="#{mealPreference}" />
+                </h:selectOneMenu>
+                <h:message for="childMealPref" errorStyle="color:red"/>
+            </h:panelGroup>
+
+            <h:panelGroup id="childBdateField" layout="block"> 
+                <h:outputLabel for="childBdate" value="Birth Date"/>
+                <h:inputText 
+                    disabled="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    readonly="#{cc.attrs.operation.equalsIgnoreCase('read') or cc.attrs.operation.equalsIgnoreCase('delete')}"
+                    type ="date" id="childBdate" value="#{cc.attrs.child.birthDate}" >
+                    <f:convertDateTime type="localDate" pattern="yyyy-MM-dd"/>
+                </h:inputText>
+                <h:message for="childBdate" errorStyle="color:red"/>
+            </h:panelGroup>
+
+            <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('create')}" value="Register Child" action="#{cc.attrs.formAction}" />
+            <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('edit')}" value="Edit Child" action="#{cc.attrs.formAction}" />
+            <h:commandButton rendered="#{cc.attrs.operation.equalsIgnoreCase('delete')}" value="Delete Record?" action="#{cc.attrs.formAction}" />
+
+        </h:form>
+
+
+    </cc:implementation>
+
+</html>

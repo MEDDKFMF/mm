@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="../WEB-INF/Templates/template.xhtml"
+                xmlns:h="jakarta.faces.html"
+                xmlns:f="jakarta.faces.core">
+
+    <ui:define name="title">
+        Parent Welcome Page
+    </ui:define>
+
+    <ui:define name="content">
+
+        This is the Parent section of the ChildCare application.  Here, parents can do children stuff.
+
+
+        <h:dataTable 
+            styleClass="table table-striped table-hover"
+            value="#{parentWelcomeController.parent.children}" 
+            var="child">
+            <h:column>
+                <f:facet name="header">Child ID</f:facet>
+                <h:outputText value="#{child.id}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Child Name</f:facet>
+                <h:outputText value="#{child.name}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Child Gender</f:facet>
+                <h:outputText value="#{child.gender.label}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Child BD</f:facet>
+                <h:outputText value="#{child.birthDate}">
+                    <f:convertDateTime type="localDate" dateStyle="full"/>
+                </h:outputText>
+            </h:column>
+
+
+            <h:column>
+                <f:facet name="header">Parent Name(s)</f:facet>
+                <ui:repeat value="#{child.parent}" var="parent">
+                    <h:outputText value="#{parent.name}"/>
+                    <br/>
+                </ui:repeat>
+            </h:column>
+
+
+            <h:column>
+                <f:facet name="header"># Care Giver</f:facet>
+                <h:outputText value="#{child.careGiver.size()}"/>
+            </h:column>
+
+
+            <h:column>
+                <h:form>
+                    <h:commandButton value="read " action="#{parentChildController.displayReadChildPage(child)}"/>
+                    <h:commandButton value="edit " action="#{parentChildController.displayEditChildPage(child)}"/>
+                    <h:commandButton value="delete" action="#{parentChildController.displayDeleteChildPage(child)}"/>
+                </h:form>
+
+
+            </h:column>
+
+        </h:dataTable>
+        
+        <h:form>
+            <h:commandLink value="Create a new Child" action="#{parentChildController.displayCreateChildPage()}"/>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="../WEB-INF/Templates/template.xhtml"
+                xmlns:ezcomp="jakarta.faces.composite/ezcomp">
+
+
+    <ui:define name="title">
+        Lab 10 - Delete Child - Confirm Before Deletion
+    </ui:define>
+    
+ <ui:define name="content">
+
+  <ezcomp:child operation="delete"
+                child="#{parentChildController.child}"
+                formAction="#{parentChildController.deleteChild()}"/>
+
+
+    </ui:define>
+
+</ui:composition>

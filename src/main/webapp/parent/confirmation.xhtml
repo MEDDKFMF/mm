@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="../WEB-INF/Templates/template.xhtml"
+                xmlns:h="jakarta.faces.html"
+                 xmlns:f="jakarta.faces.core">
+
+    <ui:define name="title">
+         <title>Lab 8 - JSF Intro New Children Form from Lab7 refactored for templates</title>
+    </ui:define>
+
+    <ui:define name="content">
+        Child #{parentChildController.child.name} was successfully created with ID #{parentChildController.child.id}
+  
+        <ul>
+            <li>#{parentChildController.child.id}</li>
+            <li>#{parentChildController.child.name}</li>
+            <li>#{parentChildController.child.gender}</li>
+            <li>#{parentChildController.child.birthDate}</li>
+            <li>#{parentChildController.child.mealPreference}</li>
+            <li>#{parentChildController.child.parent}</li>
+          
+        </ul>
+         
+         
+    </ui:define>
+
+</ui:composition>

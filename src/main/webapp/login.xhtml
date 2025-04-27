@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./WEB-INF/Templates/publicTemplate.xhtml"
+                xmlns:h="jakarta.faces.html">
+
+    <ui:define name="title">
+        Login Page
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h2 class="card-title text-center mb-4">Login</h2>
+                            <h:form>
+                                <h:panelGroup class="mb-3" layout="block">
+                                    <h:outputLabel value="Username:" for="username" />
+                                    <h:inputText styleClass="#{uname.valid ? 'form-control' : 'form-control is-invalid'}" 
+                                                 binding="#{uname}"
+                                                 id="username" value="#{loginController.user.username}"/>
+                                    <h:message for="username" errorStyle="color: red" />
+                                </h:panelGroup>
+
+                                <h:panelGroup class="mb-3" layout="block">
+                                    <h:outputLabel value="Password:" for="password" />
+                                    <h:inputSecret styleClass="form-control" id="password"  value="#{loginController.user.password}"/>
+                                    <h:message for="password" errorStyle="color: red" />
+                                </h:panelGroup>
+
+                                <h:commandButton value="Login" action="#{loginController.doLogin()}"/>
+
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+    
+
+</ui:composition>
